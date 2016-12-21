@@ -205,7 +205,7 @@ public class MainScreen implements Screen {
 			public void changed(ChangeEvent event, Actor actor) {
 				Gdx.input.setInputProcessor(null);
 
-				screen = new GameScreen(game);
+				screen = new GetInputScreen(game);
 				game.setScreen(screen);
 
 				flaggam = (flaggam + 1) % 2;

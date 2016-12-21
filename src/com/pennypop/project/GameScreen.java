@@ -26,8 +26,8 @@ public class GameScreen implements Screen {
 	private final Stage stage;
 	private final SpriteBatch spriteBatch;
 	private Game game;
-	public int x = 7;
-	public int y = 6;
+	private int x = 7;
+	private int y = 6;
 	// row and col
 	public int countforwin = 4;
 	// number for win
@@ -47,8 +47,13 @@ public class GameScreen implements Screen {
 	private Table rootable;
 	private MainScreen screen;
 	protected boolean tomain;
+	private int Ai;
 
-	public GameScreen(Game game) {
+	public GameScreen(Game game, int col, int row, int aiorNot, int counterwin) {
+		x = col;
+		y = row;
+		Ai = aiorNot;
+		countforwin = counterwin;
 		font = new BitmapFont(Gdx.files.internal("font.fnt"), false);
 
 		spriteBatch = new SpriteBatch();
