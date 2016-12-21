@@ -120,36 +120,71 @@ public class GameScreen implements Screen {
 				button.addListener(new ChangeListener() {
 					ButtonData mydata = t;
 					private int sety;
+					private int Aimove;
 					// for the location
 
 					@Override
 					public void changed(ChangeEvent event, Actor actor) {
 
-						System.out.println(mydata.getX() + "  " + mydata.getY());
-						boolean flag = false;
 						for (int k = 0; k < y; k++) {
 							if (board[mydata.getX()][k].getType() == 3) {
+								// check is it ok to move, such as not beyond
+
 								sety = k;
-								flag = true;
+								if (RorY == 0) {
+									board[mydata.getX()][sety].getButton().setStyle(redbutton.getStyle());
+								} else if (RorY == 1) {
+									board[mydata.getX()][sety].getButton().setStyle(yellowbutton.getStyle());
+
+								}
+								board[mydata.getX()][sety].setType(RorY);
+								// human move
+
+								RorY = (RorY + 1) % 2;
+								// next player
 
 								break;
 							}
 
 						}
-						// check is it aviable to move, such as not beyond range
-						if (flag) {
+						// play with human
 
-							if (RorY == 0) {
-								board[mydata.getX()][sety].getButton().setStyle(redbutton.getStyle());
-							} else if (RorY == 1) {
-								board[mydata.getX()][sety].getButton().setStyle(yellowbutton.getStyle());
+						CheckForWin();
+
+						// play with AI
+						if (Ai == 1) {
+							int Aisety = -1;
+
+							while (Aisety == -1) {
+								Aimove = (int) (Math.random() * (x));
+								for (int k = 0; k < y; k++) {
+									if (board[Aimove][k].getType() == 3) {
+										Aisety = k;
+
+										if (RorY == 0) {
+											board[Aimove][Aisety].getButton().setStyle(redbutton.getStyle());
+										} else if (RorY == 1) {
+											board[Aimove][Aisety].getButton().setStyle(yellowbutton.getStyle());
+
+										}
+										board[Aimove][Aisety].setType(RorY);
+										// ai move
+
+										RorY = (RorY + 1) % 2;
+										// next player
+
+										break;
+
+									}
+								}
 
 							}
-							board[mydata.getX()][sety].setType(RorY);
-							RorY = (RorY + 1) % 2;
+
+							CheckForWin();
+
+							System.out.println("Aimove" + Aimove + "Aisety" + Aisety);
 
 						}
-						CheckForWin();
 
 					}
 				});
@@ -197,7 +232,6 @@ public class GameScreen implements Screen {
 							if (tempx < x && board[tempx][j].getType() == rory) {
 								tempx++;
 								countforcol = countforcol + 1;
-								System.out.println("countforcol:" + countforcol);
 								if (countforcol == countforwin) {
 									ReadytoShowWin(rory);
 
@@ -215,7 +249,6 @@ public class GameScreen implements Screen {
 							if (tempy < y && board[i][tempy].getType() == rory) {
 								tempy++;
 								countforrow = countforrow + 1;
-								System.out.println("countforrow:" + countforrow);
 								if (countforrow == countforwin) {
 									ReadytoShowWin(rory);
 
@@ -238,7 +271,6 @@ public class GameScreen implements Screen {
 								tempyright++;
 								tempxright++;
 								countforright = countforright + 1;
-								System.out.println("countforright:" + countforright);
 								if (countforright == countforwin) {
 									ReadytoShowWin(rory);
 								}
@@ -260,7 +292,6 @@ public class GameScreen implements Screen {
 								tempyleft++;
 								tempxleft--;
 								counterforleft = counterforleft + 1;
-								System.out.println("counterforleft:" + counterforleft);
 								if (counterforleft == countforwin) {
 									ReadytoShowWin(rory);
 
