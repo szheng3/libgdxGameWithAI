@@ -1,6 +1,7 @@
 # libgdxGame(With AI , option to select board size, line size required to win)
 
-#Usage
+Usage:
+
 Eclipse:
 
 1. File|Import
