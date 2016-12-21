@@ -1,2 +1,1 @@
-# libgdxGame(Without AI Version)
-# libgdxGameWithAI
+# libgdxGame(With AI , option to select board size, line size required to win)
